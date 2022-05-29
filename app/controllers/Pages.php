@@ -7,11 +7,11 @@ class Pages extends Controller {
 
     public function index()
     {
-//        $posts = $this->postModel->getPosts();
+        $posts = $this->postModel->getPosts();
 
         $data = [
             'title' => 'welcome to homepage buddy',
-//            'posts' => $posts
+            'posts' => $posts
         ];
 
         $this->view('pages/index', $data);

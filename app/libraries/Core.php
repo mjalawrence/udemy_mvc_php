@@ -9,20 +9,22 @@
 class Core {
     protected $currentController = 'Pages';
     protected string $currentMethod = 'index';
-    protected array $params = [];
+    protected array $params = [''];
     public array $url = [''];
 
     public function __construct() {
-//        var_dump($this->getUrl());
         $url = $this->getUrl();
+//        var_dump($url);
 
     //Controller in URl
         // Look in controller for first value
-        if(file_exists('../app/controllers/' .  ucwords($this->url[0]) . '.php')) {
+        if(file_exists('../app/controllers/' .  $url[0] . '.php')) {
         // if exists, set as controller
             $this->currentController = ucwords($url[0]);
         // Unset 0 index
             unset($url[0]);
+        } else {
+            echo 'file doesnt exist';
         }
 
         // Require the controller
@@ -38,6 +40,8 @@ class Core {
                 $this->currentMethod = $url[1];
             // Unset 1 index
             unset($url[1]);
+            } else {
+                echo 'method doesnt exist';
             }
         }
 

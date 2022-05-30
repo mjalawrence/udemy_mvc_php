@@ -4,13 +4,16 @@
     const DB_HOST = 'db';
     const DB_USER = 'root';
     const DB_PASS = 'password';
-    const DB_NAME = 'udemy_grassroots_database';
+    const DB_NAME = 'share_posts';
 
 //App Root
     define('APPROOT', dirname(__FILE__, 2));
 
 //URL Root
-    const URLROOT = '/udemy_mvc_php/public/';
+    const URLROOT = '/share_posts_udemy/public/';
 
 //Site Name
-    const SITENAME = 'Udemy Grassroots';
+    const SITENAME = 'SharePosts';
+
+//App Version
+    const APPVERSION = '1.0';

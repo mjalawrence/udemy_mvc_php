@@ -10,21 +10,22 @@ class Core {
     protected $currentController = 'Pages';
     protected string $currentMethod = 'index';
     protected array $params = [''];
-    public array $url = [''];
+    public $url = ['nada'];
 
     public function __construct() {
-        $url = $this->getUrl();
-//        var_dump($url);
+        $this->url = $this->getUrl();
 
     //Controller in URl
         // Look in controller for first value
-        if(file_exists('../app/controllers/' .  $url[0] . '.php')) {
-        // if exists, set as controller
-            $this->currentController = ucwords($url[0]);
-        // Unset 0 index
-            unset($url[0]);
-        } else {
-            echo 'file doesnt exist';
+        if(isset($this->url[0])) {
+            if(file_exists('../app/controllers/' .  $this->url[0] . '.php')) {
+                // if exists, set as controller
+                $this->currentController = ucwords($this->url[0]);
+                // Unset 0 index
+                unset($this->url[0]);
+            } else {
+                echo 'file doesnt exist';
+            }
         }
 
         // Require the controller
@@ -34,19 +35,19 @@ class Core {
 
     //Method in URL
         //Check for [1] of url
-        if(isset($url[1])) {
+        if(isset($this->url[1])) {
             // Check to see if method exists in controller
-            if(method_exists($this->currentController, $url[1])){
-                $this->currentMethod = $url[1];
+            if(method_exists($this->currentController, $this->url[1])){
+                $this->currentMethod = $this->url[1];
             // Unset 1 index
-            unset($url[1]);
+            unset($this->url[1]);
             } else {
                 echo 'method doesnt exist';
             }
         }
 
     //Params in URL
-        $this->params = $url ? array_values($url) : [];
+        $this->params = $this->url ? array_values($this->url) : [];
 
 
         //Call a callback with array of params
@@ -55,10 +56,10 @@ class Core {
 
     public function getUrl(){
         if(isset($_GET['url'])){
-            $url = rtrim($_GET['url'],'/');
-            $url = filter_var($url, FILTER_SANITIZE_URL);
-            $url = explode('/', $url);
-            return $url;
+            $this->url = rtrim($_GET['url'],'/');
+            $this->url = filter_var($this->url, FILTER_SANITIZE_URL);
+            $this->url = explode('/', $this->url);
+            return $this->url;
         }
     }
 }

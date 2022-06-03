@@ -30,9 +30,18 @@ function flash($name = '', $message = '', $class = 'alert alert-success')
              unset($_SESSION[$name. '_class']);
         }
     }
-}
-
 //array(2) {
 //    ["register_success"]=> string(33) "You are registered and can log in"
 //    ["register_success_class"]=> string(19) "alert alert-success"
 //}
+}
+
+function isLoggedIn(): bool
+{
+    if(isset($_SESSION['user_id'])){
+        return true;
+    } else {
+        return false;
+    }
+}
+

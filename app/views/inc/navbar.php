@@ -16,12 +16,20 @@
             </ul>
 
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo URLROOT; ?>index.php?url=users/register">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo URLROOT; ?>index.php?url=users/login">Login</a>
-                </li>
+                <?php if(isset($_SESSION['user_id'])) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo URLROOT; ?>index.php?url=users/logout">Logout</a>
+<!--                        --><?php //unset($_SESSION['user_id']); ?>
+
+                    </li>
+                <?php else : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo URLROOT; ?>index.php?url=users/register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo URLROOT; ?>index.php?url=users/login">Login</a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>
